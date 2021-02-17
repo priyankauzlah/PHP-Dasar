@@ -38,7 +38,7 @@ echo $x%$y;
 echo "<p>";
 
 
-//operator assignment -> =, +=, -=, /=, %=, .=
+//operator assignment -> =, +=, -=, /=, %=, .= (buat string )
 
 $x = 10;
 $x /= 5;
