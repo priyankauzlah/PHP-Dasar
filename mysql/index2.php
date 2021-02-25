@@ -1,10 +1,19 @@
 <?php
 
-require'functions.php';
+//koneksi ke database
+$db = mysqli_connect("localhost", "root", "", "db_phpdasar");
 
 //ambil data dari tabel
-$result = query("SELECT * FROM tb_siswa");
+$result = mysqli_query($db, "SELECT * FROM tb_siswa");
 
+// var_dump($result);
+
+//ambil data (fetch) mahasiswa
+
+//mysqli_fetch_row() = mengembalikan array numerik
+//mysqli_fetch_assoc() = mengembalikan array asosiatif
+//mysqli_fetch_array() = mengembalikan dua array (aasosiatif n numerik)
+//mysqli_fetch_object() = mengembalikan array asosiatif dan atasnya jadi ada object
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +36,7 @@ $result = query("SELECT * FROM tb_siswa");
         </tr>
 
         <?php $i = 1;?>
-        <?php foreach($result as $row): ?>
+        <?php while($row = mysqli_fetch_assoc($result)):?>
             <tr>
                 <td><?= $i ?></td>
                 <td><img src="imgAnime/<?= $row ["gambar_siswa"];?>" width="100"></td>
@@ -36,7 +45,7 @@ $result = query("SELECT * FROM tb_siswa");
                 <td><?= $row["email_siswa"]?></td>
             </tr>
         <?php $i++; ?>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
 
     </table>
 </body>
