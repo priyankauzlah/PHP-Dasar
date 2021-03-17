@@ -1,8 +1,8 @@
 <?php
 
-$db = mysqli_connect("localhost", "root", "", "db_phpdasar");
+require'function.php';
+$movie = get("SELECT * FROM tb_movies");
 
-$result = mysqli_query($db, "SELECT * FROM tb_movies");
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +15,12 @@ $result = mysqli_query($db, "SELECT * FROM tb_movies");
 </head>
 <body>
     <h1>Movie Recomendation<h1>
+    <a href = 'add.php'>Add a movie recomendation</a>
+    <p>
     <table border="1" cellpadding= "10" cellspacing= "0">
         <tr>
             <th>No</th>
+            <th>Actions</th>
             <th>Movie</th>
             <th>Name</th>
             <th>Type</th>
@@ -26,9 +29,14 @@ $result = mysqli_query($db, "SELECT * FROM tb_movies");
         </tr>
 
         <?php $i = 1;?>
-        <?php while($row = mysqli_fetch_assoc($result)):?>
+        <?php foreach($movie as $row):?>
             <tr>
                 <th><?= $i ?></th>
+                <td>
+                <a href="change.php?id=<?= $row["no_movie"];?>">Change</a>
+                <a>/</a>
+                <a href="delete.php?id=<?= $row["no_movie"];?>">Delete</a>
+                </td>
                 <td><img src="img_assets/<?= $row ["img_movie"];?>" width="300"></td>
                 <td><?= $row["name_movie"]?></td>
                 <th><?= $row["type_movie"]?></th>
@@ -36,7 +44,7 @@ $result = mysqli_query($db, "SELECT * FROM tb_movies");
                 <th><?= $row["rate_movie"]?></th>
             </tr>
         <?php $i++; ?>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
 
     </table>
 </body>

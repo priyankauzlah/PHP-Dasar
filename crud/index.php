@@ -1,9 +1,7 @@
 <?php
 
 require'functions.php';
-
-//ambil data dari tabel
-$result = query("SELECT * FROM tb_siswa");
+$siswa = get("SELECT * FROM tb_siswa");
 
 ?>
 
@@ -30,12 +28,12 @@ $result = query("SELECT * FROM tb_siswa");
         </tr>
 
         <?php $i = 1;?>
-        <?php foreach($result as $row): ?>
+        <?php foreach($siswa as $row): ?>
             <tr>
                 <td><?= $i ?></td>
                 <td>
-                <a href="">ubah</a>
-                <a href="">hapus</a>
+                <a href="ubah.php?id=<?= $row["id_siswa"];?>">ubah | </a>
+                <a href="hapus.php?id=<?= $row["id_siswa"];?>">hapus</a>
                 </td>
                 <td><img src="imgAnime/<?= $row ["gambar_siswa"];?>" width="100"></td>
                 <td><?= $row["nama_siswa"]?></td>

@@ -1,15 +1,19 @@
 <?php
 
 require 'functions.php';
+$id = $_GET["id"];
+$siswa = get("SELECT * FROM tb_siswa WHERE id_siswa = $id")[0];
+
+
 
 //cek apakah tombol submit udah di tekan atau belum 
 if(isset($_POST["submit"])){
 
-    if(tambah($_POST) > 0){
+    if(ubah($_POST) > 0){
         //kalo gagal
         echo "
             <script>
-            alert('data berhasil ditambahkan!');
+            alert('data berhasil diubah!');
             document.location.href = 'index.php';
             </script>
         ";
@@ -17,11 +21,14 @@ if(isset($_POST["submit"])){
         //kalo berhasil
         echo "
             <script>
-            alert('data gagal ditambahkan!');
+            alert('data gagal diubah!');
             document.location.href = 'index.php';
             </script>
         ";
     }
+
+    $db = mysqli_connect("localhost", "root", "", "db_phpdasar");
+    echo mysqli_error($db);
 }
 
 ?>
@@ -35,26 +42,33 @@ if(isset($_POST["submit"])){
     <title>Document</title>
 </head>
 <body>
-    <h1> Tambah Data Siswa</h1>
+    <h1> Ubah Data Siswa</h1>
 
     <form action="" method="post">
+
+        <input type="hidden" name="id_siswa" value="<?= $siswa["id_siswa"];?>"></input>
+            
         <label for="gambar_siswa">Gambar :</label>
-        <input type="text" name="gambar_siswa" id="gambar_siswa" required></input>
+        <input type="text" name="gambar_siswa" id="gambar_siswa" required 
+        value="<?= $siswa["gambar_siswa"];?>"></input>
         
         <p></p>
 
         <label for="nama_siswa">Nama :</label>
-        <input type="text" name="nama_siswa" id="nama_siswa" required></input>
+        <input type="text" name="nama_siswa" id="nama_siswa" required 
+        value="<?= $siswa["nama_siswa"];?>"></input>
 
         <p></p>
 
         <label for="kelas_siswa">Kelas :</label>
-        <input type="text" name="kelas_siswa" id="kelas_siswa" required></input>
+        <input type="text" name="kelas_siswa" id="kelas_siswa" required 
+        value="<?= $siswa["kelas_siswa"];?>"></input>
 
         <p></p>
 
         <label for="email_siswa">Email :</label>
-        <input type="text" name="email_siswa" id="email_siswa" required></input>
+        <input type="text" name="email_siswa" id="email_siswa" required 
+        value="<?= $siswa["email_siswa"];?>"></input>
 
         <p></p>
 
