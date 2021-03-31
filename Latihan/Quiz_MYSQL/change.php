@@ -2,13 +2,12 @@
 
 require 'function.php';
 $id = $_GET["id"];
-$movie = get("SELECT * FROM tb_movies WHERE no_movies = $id")[0];
+$movie = get("SELECT * FROM tb_movies WHERE no_movie = $id")[0];
 
 
 if(isset($_POST["submit"])){
 
     if(change($_POST) > 0){
-        // success added
         echo "
             <script>
             alert('Data succesfully added!');
@@ -16,7 +15,6 @@ if(isset($_POST["submit"])){
             </script>
         ";
     }else{
-        //failed added
         echo "
             <script>
             alert('Data failed added!');

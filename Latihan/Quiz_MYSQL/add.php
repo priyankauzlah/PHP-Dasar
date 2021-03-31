@@ -5,7 +5,6 @@ require 'function.php';
 if(isset($_POST["submit"])){
 
     if(add($_POST) > 0){
-        //if succes
         echo "
             <script>
             alert('Data succesfully added!');
@@ -13,7 +12,6 @@ if(isset($_POST["submit"])){
             </script>
         ";
     }else{
-        //if failed
         echo "
             <script>
             alert('Data failed added!');

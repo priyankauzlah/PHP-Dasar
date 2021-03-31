@@ -3,6 +3,10 @@
 require'function.php';
 $movie = get("SELECT * FROM tb_movies");
 
+if (isset($_POST["search"])){
+    $movie = search($_POST["keyword"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +20,13 @@ $movie = get("SELECT * FROM tb_movies");
 <body>
     <h1>Movie Recomendation<h1>
     <a href = 'add.php'>Add a movie recomendation</a>
+    <p>
+
+    <form action="" method="post">
+    <input type="text" name="keyword" size="20" autofocus placeholder="Search Here" autocomplete="off">
+    <button type="Submit" name="search"> Search </button>
+    </form>
+
     <p>
     <table border="1" cellpadding= "10" cellspacing= "0">
         <tr>
@@ -33,8 +44,7 @@ $movie = get("SELECT * FROM tb_movies");
             <tr>
                 <th><?= $i ?></th>
                 <td>
-                <a href="change.php?id=<?= $row["no_movie"];?>">Change</a>
-                <a>/</a>
+                <a href="change.php?id=<?= $row["no_movie"];?>">Update | </a>
                 <a href="delete.php?id=<?= $row["no_movie"];?>">Delete</a>
                 </td>
                 <td><img src="img_assets/<?= $row ["img_movie"];?>" width="300"></td>
@@ -47,5 +57,6 @@ $movie = get("SELECT * FROM tb_movies");
         <?php endforeach; ?>
 
     </table>
+    </p>
 </body>
 </html>

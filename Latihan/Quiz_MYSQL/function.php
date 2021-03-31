@@ -28,15 +28,8 @@ function add($post){
     return mysqli_affected_rows($db);
 }
 
-function delete($id){
-    global $db;
-    mysqli_query($db, "DELETE FROM tb_movies WHERE no_movies = $id");
-    return mysqli_affected_rows($db);
-}
-
 function change($data){
     global $db;
-
     $id = $data["no_movie"];
     $movie = $data["img_movie"];
     $name = $data["name_movie"];
@@ -56,5 +49,22 @@ function change($data){
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);
+}
+
+function delete($id){
+    global $db;
+    mysqli_query($db, "DELETE FROM tb_movies WHERE no_movie = $id");
+    return mysqli_affected_rows($db);
+}
+
+function search($keyword){
+    $query = "SELECT * FROM tb_movies WHERE
+    name_movie LIKE '%$keyword%' OR
+    type_movie LIKE '%$keyword%' OR
+    genre_movie LIKE '%$keyword%' OR
+    rate_movie LIKE '%$keyword%'
+    ";
+
+    return get($query);
 }
 ?>
